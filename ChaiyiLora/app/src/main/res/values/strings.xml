@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">ChaiyiLora</string>
+    <string-array name="Indoor_Data">
+        <item>溫度 Temperature</item>
+        <item>濕度 Humidity</item>
+        <item>一氧化碳 Carbon Monoxide</item>
+        <item>二氧化碳 Carbon Dioxide</item>
+        <item>瓦斯 LPG</item>
+        <item>空氣微粒 PM</item>
+        <item>火焰感測 Fire Detect</item>
+        <item>風速 Wind Velocity</item>
+        <item>雨量 Rain Detect</item>
+
+    </string-array>
+    <string-array name="Outdoor_Data">
+        <item>溫度 Temperature</item>
+        <item>濕度 Humidity</item>
+        <item>二氧化碳 Carbon Dioxide</item>
+        <item>空氣微粒 PM</item>
+        <item>風速 Wind Velocity</item>
+        <item>雨量 Rain Detect</item>
+        <item>大氣壓力 Pressure</item>
+        <item>經度 Longitude</item>
+        <item>緯度 Latitude</item>
+    </string-array>
+</resources>

@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorW"
+    tools:context=".MainActivity"
+    tools:layout_editor_absoluteY="81dp">
+
+    <ScrollView
+        android:id="@+id/SECOND_SCROLLVIEW"
+        android:layout_width="wrap_content"
+        android:layout_height="350dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/FIRST_SCROLLVIEW"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/TXV_CO"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="一氧化碳"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <com.github.anastr.speedviewlib.AwesomeSpeedometer
+                android:id="@+id/GAUGE_CO"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                app:sv_withTremble="false"
+                tools:layout_editor_absoluteX="260dp"
+                tools:layout_editor_absoluteY="271dp" />
+
+            <TextView
+                android:id="@+id/TXV_LPG"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="\n瓦斯"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <com.github.anastr.speedviewlib.SpeedView
+                android:id="@+id/GAUGE_LPG"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                app:sv_withTremble="false"
+                tools:layout_editor_absoluteX="273dp"
+                tools:layout_editor_absoluteY="155dp" />
+
+            <TextView
+                android:id="@+id/TXV_DUST"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="\nPM"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <com.github.anastr.speedviewlib.DeluxeSpeedView
+                android:id="@+id/GAUGE_PM"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:sv_withTremble="false"
+                tools:layout_editor_absoluteY="54dp" />
+
+            <TextView
+                android:id="@+id/TXV_PRESSURE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="\n氣壓"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <com.github.anastr.speedviewlib.RaySpeedometer
+                android:id="@+id/GAUGE_PRESSURE"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:sv_withTremble="false"
+                tools:layout_editor_absoluteY="373dp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/FIRST_SCROLLVIEW"
+        android:layout_width="145dp"
+        android:layout_height="354dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toStartOf="@+id/SECOND_SCROLLVIEW"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/TXV_TEMP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="溫度"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <com.github.anastr.speedviewlib.ImageLinearGauge
+                android:id="@+id/GAUGE_TEMP"
+                android:layout_width="163dp"
+                android:layout_height="75dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:sv_image="@drawable/fire"
+                app:sv_withTremble="false"
+                tools:layout_editor_absoluteY="76dp" />
+
+            <TextView
+                android:id="@+id/TXV_HUMIDITY"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="\n濕度"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <com.github.anastr.speedviewlib.ImageLinearGauge
+                android:id="@+id/GAUGE_HUMIDITY"
+                android:layout_width="150dp"
+                android:layout_height="140dp"
+                android:visibility="visible"
+                app:sv_image="@drawable/water"
+                app:sv_textSize="20dp"
+                app:sv_withTremble="false"
+                tools:layout_editor_absoluteX="285dp"
+                tools:layout_editor_absoluteY="104dp" />
+
+            <TextView
+                android:id="@+id/TXV_CO2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="\n二氧化碳"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <com.github.anastr.speedviewlib.ProgressiveGauge
+                android:id="@+id/GAUGE_CO2"
+                android:layout_width="150dp"
+                android:layout_height="120dp"
+                app:sv_withTremble="false"
+                tools:layout_editor_absoluteX="45dp"
+                tools:layout_editor_absoluteY="213dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorDG"
+        app:layout_constraintBottom_toTopOf="@+id/SECOND_SCROLLVIEW"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/BT_INDOOR_LABEL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorW"
+            android:text="最新室內資料"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/BT_OUTDOOR_LABEL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorG"
+            android:text="最新室外資料"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/FIRST_SCROLLVIEW">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/BT_ADVANCE_QUERY">
+
+            <Button
+                android:id="@+id/BT_DATA_UPDATE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="最新資料更新" />
+
+            <Button
+                android:id="@+id/BT_TRANS_NEW_WINDOW"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/BT_DATA_UPDATE"
+                android:text="室內資料呈現" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="416dp">
+
+            <Button
+                android:id="@+id/BT_ADVANCE_QUERY"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="進階資料查詢"
+                app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/BT_LOOK_DATA_DETAILS"
+                app:layout_constraintTop_toBottomOf="@+id/SECOND_SCROLLVIEW" />
+
+            <Button
+                android:id="@+id/BT_LOOK_DATA_DETAILS"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="詳細資料"
+                app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
+                app:layout_constraintEnd_toStartOf="@+id/BT_ADVANCE_QUERY"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/FIRST_SCROLLVIEW" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
