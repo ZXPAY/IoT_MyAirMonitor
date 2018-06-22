@@ -6,8 +6,6 @@ package com.example.zxpay.chaiyilora;
     import android.support.annotation.NonNull;
     import android.support.v7.app.AppCompatActivity;
     import android.os.Bundle;
-    import android.text.Editable;
-    import android.text.TextWatcher;
     import android.util.Log;
     import android.view.View;
     import android.widget.Button;
@@ -29,7 +27,6 @@ package com.example.zxpay.chaiyilora;
     import java.util.ArrayList;
     import java.util.Calendar;
     import java.util.Date;
-    import java.util.HashMap;
     import java.util.LinkedHashMap;
     import java.util.Map;
 
@@ -40,8 +37,7 @@ public class MainAdvanceIndoorQuery extends AppCompatActivity implements Button.
     private int ButtonID[] = {R.id.BT_BACK};
     boolean DEBUG = true;
     Map<String, String> Temp_Datai = new LinkedHashMap<String, String>();  // i => indoor
-    Map<String, String> Temp_Datao = new LinkedHashMap<String, String>(); // o => outdoor
-    Map<String, String> Humi_Datao = new LinkedHashMap<String, String>();
+    Map<String, String> Humi_Datai = new LinkedHashMap<String, String>();
     Map<String, String> LPG_Data = new LinkedHashMap<String, String>();
     Map<String, String> CO_Data = new LinkedHashMap<String, String>();
     Map<String, String> CO2_Data = new LinkedHashMap<String, String>();
@@ -49,11 +45,7 @@ public class MainAdvanceIndoorQuery extends AppCompatActivity implements Button.
     Map<String, String> Loc_Data = new LinkedHashMap<String, String>();
     Map<String, String> Dust_Data = new LinkedHashMap<String, String>();
 
-    private final int CHOOSE_INDOOR = 0;
-    private final int CHOOSE_OUTDOOR = 1;
-
-    private String UsingIndoor = "/InDoor/0000000012000008/";
-    private String UsingOutdoor = "/OutDoor/0000000012000007/";
+    private String UsingIndoor = "/OutDoor/0000000012000007/";
 
     private String time_name = "time";
     private String rssi_name = "rssi";
@@ -88,7 +80,7 @@ public class MainAdvanceIndoorQuery extends AppCompatActivity implements Button.
             btn.setOnClickListener(this);
         }
 
-        mygroup = (RadioGroup) findViewById(R.id.RADION_GROUP);
+        mygroup = (RadioGroup) findViewById(R.id.RADIO_GROUP);
         mygroup.setOnCheckedChangeListener(this);
 
         EditText_date = (EditText) findViewById(R.id.EDIT_DATE);
@@ -273,17 +265,17 @@ public class MainAdvanceIndoorQuery extends AppCompatActivity implements Button.
                     }
                     if (!temp.isEmpty()) {
                         for (int i = 0; i < temp.size(); i++) {
-                            Temp_Datao.put(t.get(i), temp.get(i));
+                            Temp_Datai.put(t.get(i), temp.get(i));
                         }
-                        advance_show(Temp_Datao, "溫度", "\u00b0"+"C");
-                        Temp_Datao = new LinkedHashMap<String, String>();
+                        advance_show(Temp_Datai, "溫度", "\u00b0"+"C");
+                        Temp_Datai = new LinkedHashMap<String, String>();
                     }
                     if (!humi.isEmpty()) {
                         for (int i = 0; i < humi.size(); i++) {
-                            Humi_Datao.put(t.get(i), humi.get(i));
+                            Humi_Datai.put(t.get(i), humi.get(i));
                         }
-                        advance_show(Humi_Datao, "濕度", "%");
-                        Humi_Datao = new LinkedHashMap<String, String>();
+                        advance_show(Humi_Datai, "濕度", "%");
+                        Humi_Datai = new LinkedHashMap<String, String>();
                     }
                     if (!co.isEmpty()) {
                         for (int i = 0; i < co.size(); i++) {
@@ -354,19 +346,17 @@ public class MainAdvanceIndoorQuery extends AppCompatActivity implements Button.
             Log.e("Update", "Update !!!");
             myQuery.mode = 1;
             myQuery.VERBOSE = false;
-            CollectionReference ref = db.collection(UsingOutdoor+query_name);
+            CollectionReference ref = db.collection(UsingIndoor+query_name);
             myQuery.Query(ref, time_name, ">=", choose_date, 50, "ASCENDING");
         }
 
     }
 
-
-
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.BT_BACK:
-                if(DEBUG) Log.e("Button", "Outdoor Back Click");
+                if(DEBUG) Log.e("Button", "Indoor Back Click");
                 Intent intent_back = new Intent();
                 intent_back.setClass(MainAdvanceIndoorQuery.this, MainActivity.class);
                 startActivity(intent_back);

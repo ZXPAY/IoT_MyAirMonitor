@@ -3,12 +3,9 @@ package com.example.zxpay.chaiyilora;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.os.TestLooperManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -30,18 +27,17 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+public class MainAdvanceOutdoorQuery extends AppCompatActivity implements Button.OnClickListener,
+                        RadioGroup.OnCheckedChangeListener{
 
-public class MainOutdoorAdvance extends AppCompatActivity implements Button.OnClickListener,
-                                            RadioGroup.OnCheckedChangeListener{
-
-    private int ButtonID[] = {R.id.BT_BACK};
+    int ButtonID[] = {R.id.BT_BACK};
     boolean DEBUG = true;
     Map<String, String> Temp_Datai = new LinkedHashMap<String, String>();  // i => indoor
-    Map<String, String> Temp_Datao = new LinkedHashMap<String, String>(); // o => outdoor
+    Map<String, String> Humi_Datai = new LinkedHashMap<String, String>();
+    Map<String, String> Temp_Datao = new LinkedHashMap<String, String>();  // o => outdoor
     Map<String, String> Humi_Datao = new LinkedHashMap<String, String>();
     Map<String, String> LPG_Data = new LinkedHashMap<String, String>();
     Map<String, String> CO_Data = new LinkedHashMap<String, String>();
@@ -50,11 +46,7 @@ public class MainOutdoorAdvance extends AppCompatActivity implements Button.OnCl
     Map<String, String> Loc_Data = new LinkedHashMap<String, String>();
     Map<String, String> Dust_Data = new LinkedHashMap<String, String>();
 
-    private final int CHOOSE_INDOOR = 0;
-    private final int CHOOSE_OUTDOOR = 1;
-
-    private String UsingIndoor = "/InDoor/0000000012000008/";
-    private String UsingOutdoor = "/OutDoor/0000000012000007/";
+    private String UsingOutdoor = "/InDoor/0000000012000008/";
 
     private String time_name = "time";
     private String rssi_name = "rssi";
@@ -82,14 +74,14 @@ public class MainOutdoorAdvance extends AppCompatActivity implements Button.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_outdoor_advance);
+        setContentView(R.layout.activity_main_advance_outdoor_query);
 
         for(int id:ButtonID){
             Button btn = (Button) findViewById(id);
             btn.setOnClickListener(this);
         }
 
-        mygroup = (RadioGroup) findViewById(R.id.RADION_GROUP);
+        mygroup = (RadioGroup) findViewById(R.id.RADIO_GROUP);
         mygroup.setOnCheckedChangeListener(this);
 
         EditText_date = (EditText) findViewById(R.id.EDIT_DATE);
@@ -100,6 +92,7 @@ public class MainOutdoorAdvance extends AppCompatActivity implements Button.OnCl
         choose_date = Get_Now();
         EditText_date.setText(choose_date);
         advanced_update();
+
     }
 
     private String Get_Now(){
@@ -107,7 +100,6 @@ public class MainOutdoorAdvance extends AppCompatActivity implements Button.OnCl
         Date today = Calendar.getInstance().getTime();
         return dateFormat.format(today).toString();
     }
-
 
     private class MyQuery {
         /*
@@ -361,15 +353,41 @@ public class MainOutdoorAdvance extends AppCompatActivity implements Button.OnCl
 
     }
 
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        switch (checkedId){
+            case R.id.RBT_TEMP:
+                if(DEBUG) Log.e("Radio Button", "Temperature");
+                query_name = temp_name;
+                advanced_update();
+                break;
+            case R.id.RBT_HUMIDITY:
+                if(DEBUG) Log.e("Radio Button", "Humidity");
+                query_name = humidity_name;
+                advanced_update();
+                break;
+        }
+    }
 
+    private String Check_Two_Letters(String str_in){
+        if(str_in.length()<2){
+            return ("0"+str_in);
+        }
+        else{
+            return str_in;
+        }
+    }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.BT_QUERY:
+                Log.e("Query", "Outdoor Query Data.");
+
+                break;
             case R.id.BT_BACK:
-                if(DEBUG) Log.e("Button", "Outdoor Back Click");
                 Intent intent_back = new Intent();
-                intent_back.setClass(MainOutdoorAdvance.this, MainActivity.class);
+                intent_back.setClass(MainAdvanceOutdoorQuery.this, MainActivity.class);
                 startActivity(intent_back);
                 break;
             case R.id.EDIT_DATE:
@@ -416,58 +434,6 @@ public class MainOutdoorAdvance extends AppCompatActivity implements Button.OnCl
                 }, hour, minute, false).show();
 
                 break;
-        }
-    }
-
-    private String Check_Two_Letters(String str_in){
-        if(str_in.length()<2){
-            return ("0"+str_in);
-        }
-        else{
-            return str_in;
-        }
-    }
-
-
-    @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-        switch (checkedId){
-            case R.id.RBT_TEMP:
-                if(DEBUG) Log.e("Radio Button", "Temperature");
-                query_name = temp_name;
-                advanced_update();
-                break;
-            case R.id.RBT_HUMIDITY:
-                if(DEBUG) Log.e("Radio Button", "Humidity");
-                query_name = humidity_name;
-                advanced_update();
-                break;
-            case R.id.RBT_CO:
-                if(DEBUG) Log.e("Radio Button", "CO");
-                query_name = CO_name;
-                advanced_update();
-                break;
-            case R.id.RBT_CO2:
-                if(DEBUG) Log.e("Radio Button", "CO2");
-                query_name = CO2_name;
-                advanced_update();
-                break;
-            case R.id.RBT_LPG:
-                if(DEBUG) Log.e("Radio Button", "LPG");
-                query_name = LPG_name;
-                advanced_update();
-                break;
-            case R.id.RBT_PM:
-                if(DEBUG) Log.e("Radio Button", "PM");
-                query_name = dust_name;
-                advanced_update();
-                break;
-            case R.id.RBT_PRESSURE:
-                if(DEBUG) Log.e("Radio Button", "Pressure");
-                query_name = pressure_name;
-                advanced_update();
-                break;
-
         }
     }
 }

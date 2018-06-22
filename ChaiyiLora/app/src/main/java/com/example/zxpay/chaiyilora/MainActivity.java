@@ -664,7 +664,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                 }
                 else if(show_data_type == CHOOSE_OUTDOOR){
                     Intent intent_outdoor = new Intent();
-                    intent_outdoor.setClass(MainActivity.this, MainOutdoorAdvance.class);
+                    intent_outdoor.setClass(MainActivity.this, MainAdvanceOutdoorQuery.class);
                     startActivity(intent_outdoor);
                 }
                 break;

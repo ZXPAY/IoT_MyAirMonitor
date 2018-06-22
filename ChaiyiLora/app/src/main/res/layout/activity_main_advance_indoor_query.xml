@@ -14,7 +14,7 @@ tools:layout_editor_absoluteY="81dp">
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.5"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/RADION_GROUP" />
+    app:layout_constraintTop_toBottomOf="@+id/RADIO_GROUP" />
 
 <EditText
     android:id="@+id/EDIT_DATE"
@@ -48,14 +48,14 @@ tools:layout_editor_absoluteY="81dp">
     android:text="參數"
     android:textSize="20dp"
     android:textStyle="bold"
-    app:layout_constraintBottom_toTopOf="@+id/RADION_GROUP"
+    app:layout_constraintBottom_toTopOf="@+id/RADIO_GROUP"
     app:layout_constraintEnd_toStartOf="@+id/scrollView2"
     app:layout_constraintHorizontal_bias="0.5"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 <RadioGroup
-    android:id="@+id/RADION_GROUP"
+    android:id="@+id/RADIO_GROUP"
     android:layout_width="109dp"
     android:layout_height="362dp"
     android:orientation="vertical"
@@ -150,7 +150,7 @@ tools:layout_editor_absoluteY="81dp">
     app:layout_constraintBottom_toTopOf="@+id/BT_BACK"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.5"
-    app:layout_constraintStart_toEndOf="@+id/RADION_GROUP"
+    app:layout_constraintStart_toEndOf="@+id/RADIO_GROUP"
     app:layout_constraintTop_toBottomOf="@+id/EDIT_DATE">
 
     <LinearLayout

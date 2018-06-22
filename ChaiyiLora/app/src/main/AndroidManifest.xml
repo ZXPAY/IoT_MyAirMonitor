@@ -19,9 +19,8 @@
         <activity android:name=".MainActivityIndoor" />
         <activity android:name=".MainActivityOutdoor" />
         <activity android:name=".MainActivityDetails" />
-        <activity android:name=".MainIndoorAdvance" />
-        <activity android:name=".MainOutdoorAdvance" />
-        <activity android:name=".MainAdvanceIndoorQuery"></activity>
+        <activity android:name=".MainAdvanceIndoorQuery" />
+        <activity android:name=".MainAdvanceOutdoorQuery"></activity>
     </application>
 
 </manifest>
