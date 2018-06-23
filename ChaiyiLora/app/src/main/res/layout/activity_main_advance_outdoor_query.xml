@@ -8,12 +8,11 @@
 
     <Button
         android:id="@+id/BT_BACK"
-        android:layout_width="327dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
         android:text="BACK"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/BT_PLOT"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
@@ -24,10 +23,12 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="date"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/scrollView2"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/TXV_DATE"
+        app:layout_constraintStart_toEndOf="@+id/scrollView2"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -47,8 +48,8 @@
         android:id="@+id/TXV_PARAMETERS"
         android:layout_width="wrap_content"
         android:layout_height="31dp"
-        android:layout_marginBottom="7dp"
-        android:layout_marginTop="7dp"
+        android:layout_marginBottom="14dp"
+        android:layout_marginTop="5dp"
         android:text="參數"
         android:textSize="20dp"
         android:textStyle="bold"
@@ -62,8 +63,8 @@
         android:id="@+id/RADIO_GROUP"
         android:layout_width="109dp"
         android:layout_height="101dp"
-        android:layout_marginBottom="269dp"
-        android:layout_marginTop="7dp"
+        android:layout_marginBottom="262dp"
+        android:layout_marginTop="11dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/BT_BACK"
         app:layout_constraintEnd_toStartOf="@+id/scrollView2"
@@ -97,7 +98,7 @@
         android:id="@+id/textView2"
         android:layout_width="82dp"
         android:layout_height="49dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="5dp"
         app:layout_constraintBottom_toTopOf="@+id/TXV_PARAMETERS"
         app:layout_constraintEnd_toStartOf="@+id/TXV_DATE"
         app:layout_constraintHorizontal_bias="0.5"
@@ -128,5 +129,16 @@
                 tools:layout_editor_absoluteY="89dp" />
         </LinearLayout>
     </ScrollView>
+
+    <Button
+        android:id="@+id/BT_PLOT"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:text="資料呈現"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/BT_BACK"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
 </android.support.constraint.ConstraintLayout>

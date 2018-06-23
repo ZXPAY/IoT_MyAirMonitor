@@ -1,171 +1,184 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:layout_editor_absoluteY="81dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteY="81dp">
 
-<Button
-    android:id="@+id/BT_BACK"
-    android:layout_width="327dp"
-    android:layout_height="wrap_content"
-    android:text="BACK"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.5"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/RADIO_GROUP" />
-
-<EditText
-    android:id="@+id/EDIT_DATE"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:ems="10"
-    android:inputType="date"
-    app:layout_constraintBottom_toTopOf="@+id/scrollView2"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.5"
-    app:layout_constraintStart_toEndOf="@+id/TXV_DATE"
-    app:layout_constraintTop_toTopOf="parent" />
-
-<TextView
-    android:id="@+id/TXV_DATE"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="日期"
-    android:textSize="20dp"
-    android:textStyle="bold"
-    app:layout_constraintBottom_toTopOf="@+id/scrollView2"
-    app:layout_constraintEnd_toStartOf="@+id/EDIT_DATE"
-    app:layout_constraintHorizontal_bias="0.5"
-    app:layout_constraintStart_toEndOf="@+id/textView2"
-    app:layout_constraintTop_toTopOf="parent" />
-
-<TextView
-    android:id="@+id/TXV_PARAMETERS"
-    android:layout_width="wrap_content"
-    android:layout_height="31dp"
-    android:text="參數"
-    android:textSize="20dp"
-    android:textStyle="bold"
-    app:layout_constraintBottom_toTopOf="@+id/RADIO_GROUP"
-    app:layout_constraintEnd_toStartOf="@+id/scrollView2"
-    app:layout_constraintHorizontal_bias="0.5"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-<RadioGroup
-    android:id="@+id/RADIO_GROUP"
-    android:layout_width="109dp"
-    android:layout_height="362dp"
-    android:orientation="vertical"
-    app:layout_constraintBottom_toTopOf="@+id/BT_BACK"
-    app:layout_constraintEnd_toStartOf="@+id/scrollView2"
-    app:layout_constraintHorizontal_bias="0.5"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/TXV_PARAMETERS">
-
-    <RadioButton
-        android:id="@+id/RBT_TEMP"
-        android:layout_width="92dp"
-        android:layout_height="19dp"
-        android:layout_weight="1"
-        android:checked="true"
-        android:text="溫度"
-        tools:layout_editor_absoluteX="130dp"
-        tools:layout_editor_absoluteY="90dp" />
-
-    <RadioButton
-        android:id="@+id/RBT_HUMIDITY"
-        android:layout_width="95dp"
-        android:layout_height="31dp"
-        android:layout_weight="1"
-        android:checked="false"
-        android:text="濕度"
-        tools:layout_editor_absoluteX="225dp"
-        tools:layout_editor_absoluteY="90dp" />
-
-    <RadioButton
-        android:id="@+id/RBT_CO"
-        android:layout_width="match_parent"
-        android:layout_height="31dp"
-        android:layout_weight="1"
-        android:text="一氧化碳"
-        tools:layout_editor_absoluteX="250dp"
-        tools:layout_editor_absoluteY="185dp" />
-
-    <RadioButton
-        android:id="@+id/RBT_CO2"
-        android:layout_width="97dp"
-        android:layout_height="31dp"
-        android:layout_weight="1"
-        android:text="二氧化碳"
-        tools:layout_editor_absoluteX="144dp"
-        tools:layout_editor_absoluteY="134dp" />
-
-    <RadioButton
-        android:id="@+id/RBT_LPG"
-        android:layout_width="93dp"
-        android:layout_height="31dp"
-        android:layout_weight="1"
-        android:text="瓦斯"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="241dp" />
-
-    <RadioButton
-        android:id="@+id/RBT_PM"
-        android:layout_width="93dp"
-        android:layout_height="31dp"
-        android:layout_weight="1"
-        android:text="PM"
-        tools:layout_editor_absoluteX="250dp"
-        tools:layout_editor_absoluteY="134dp" />
-
-    <RadioButton
-        android:id="@+id/RBT_PRESSURE"
-        android:layout_width="98dp"
-        android:layout_height="31dp"
-        android:layout_weight="1"
-        android:text="壓力"
-        tools:layout_editor_absoluteX="175dp"
-        tools:layout_editor_absoluteY="185dp" />
-
-</RadioGroup>
-
-<TextView
-    android:id="@+id/textView2"
-    android:layout_width="82dp"
-    android:layout_height="49dp"
-    app:layout_constraintBottom_toTopOf="@+id/TXV_PARAMETERS"
-    app:layout_constraintEnd_toStartOf="@+id/TXV_DATE"
-    app:layout_constraintHorizontal_bias="0.5"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
-
-<ScrollView
-    android:id="@+id/scrollView2"
-    android:layout_width="268dp"
-    android:layout_height="419dp"
-    app:layout_constraintBottom_toTopOf="@+id/BT_BACK"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.5"
-    app:layout_constraintStart_toEndOf="@+id/RADIO_GROUP"
-    app:layout_constraintTop_toBottomOf="@+id/EDIT_DATE">
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/BT_BACK"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:text="BACK"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/BT_PLOT"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
-        <TextView
-            android:id="@+id/TXV_SHOW"
+    <EditText
+        android:id="@+id/EDIT_DATE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="date"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/TXV_DATE"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TXV_DATE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="日期"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintEnd_toStartOf="@+id/EDIT_DATE"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TXV_PARAMETERS"
+        android:layout_width="wrap_content"
+        android:layout_height="31dp"
+        android:text="參數"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/RADIO_GROUP"
+        app:layout_constraintEnd_toStartOf="@+id/scrollView2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <RadioGroup
+        android:id="@+id/RADIO_GROUP"
+        android:layout_width="109dp"
+        android:layout_height="362dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/BT_BACK"
+        app:layout_constraintEnd_toStartOf="@+id/scrollView2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TXV_PARAMETERS">
+
+        <RadioButton
+            android:id="@+id/RBT_TEMP"
+            android:layout_width="92dp"
+            android:layout_height="19dp"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="溫度"
+            tools:layout_editor_absoluteX="130dp"
+            tools:layout_editor_absoluteY="90dp" />
+
+        <RadioButton
+            android:id="@+id/RBT_HUMIDITY"
+            android:layout_width="95dp"
+            android:layout_height="31dp"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="濕度"
+            tools:layout_editor_absoluteX="225dp"
+            tools:layout_editor_absoluteY="90dp" />
+
+        <RadioButton
+            android:id="@+id/RBT_CO"
+            android:layout_width="match_parent"
+            android:layout_height="31dp"
+            android:layout_weight="1"
+            android:text="一氧化碳"
+            tools:layout_editor_absoluteX="250dp"
+            tools:layout_editor_absoluteY="185dp" />
+
+        <RadioButton
+            android:id="@+id/RBT_CO2"
+            android:layout_width="97dp"
+            android:layout_height="31dp"
+            android:layout_weight="1"
+            android:text="二氧化碳"
+            tools:layout_editor_absoluteX="144dp"
+            tools:layout_editor_absoluteY="134dp" />
+
+        <RadioButton
+            android:id="@+id/RBT_LPG"
+            android:layout_width="93dp"
+            android:layout_height="31dp"
+            android:layout_weight="1"
+            android:text="瓦斯"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="241dp" />
+
+        <RadioButton
+            android:id="@+id/RBT_PM"
+            android:layout_width="93dp"
+            android:layout_height="31dp"
+            android:layout_weight="1"
+            android:text="PM"
+            tools:layout_editor_absoluteX="250dp"
+            tools:layout_editor_absoluteY="134dp" />
+
+        <RadioButton
+            android:id="@+id/RBT_PRESSURE"
+            android:layout_width="98dp"
+            android:layout_height="31dp"
+            android:layout_weight="1"
+            android:text="壓力"
+            tools:layout_editor_absoluteX="175dp"
+            tools:layout_editor_absoluteY="185dp" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="82dp"
+        android:layout_height="49dp"
+        app:layout_constraintBottom_toTopOf="@+id/TXV_PARAMETERS"
+        app:layout_constraintEnd_toStartOf="@+id/TXV_DATE"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="268dp"
+        android:layout_height="419dp"
+        app:layout_constraintBottom_toTopOf="@+id/BT_BACK"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/RADIO_GROUP"
+        app:layout_constraintTop_toBottomOf="@+id/EDIT_DATE">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="資料顯示於此"
-            tools:layout_editor_absoluteX="147dp"
-            tools:layout_editor_absoluteY="89dp" />
-    </LinearLayout>
-</ScrollView>
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/TXV_SHOW"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="資料顯示於此"
+                tools:layout_editor_absoluteX="147dp"
+                tools:layout_editor_absoluteY="89dp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/BT_PLOT"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:text="資料呈現"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/BT_BACK"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
 </android.support.constraint.ConstraintLayout>

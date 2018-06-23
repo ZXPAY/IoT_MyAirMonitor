@@ -16,11 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivityIndoor" />
-        <activity android:name=".MainActivityOutdoor" />
         <activity android:name=".MainActivityDetails" />
         <activity android:name=".MainAdvanceIndoorQuery" />
-        <activity android:name=".MainAdvanceOutdoorQuery"></activity>
+        <activity android:name=".MainAdvanceOutdoorQuery" />
+        <activity android:name=".MainActivityPlotData"></activity>
     </application>
 
 </manifest>

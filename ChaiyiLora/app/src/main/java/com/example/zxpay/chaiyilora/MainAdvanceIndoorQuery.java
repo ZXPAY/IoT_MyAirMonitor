@@ -14,6 +14,7 @@ package com.example.zxpay.chaiyilora;
     import android.widget.RadioGroup;
     import android.widget.TextView;
     import android.widget.TimePicker;
+    import android.widget.Toast;
 
     import com.google.android.gms.tasks.OnCompleteListener;
     import com.google.android.gms.tasks.Task;
@@ -34,7 +35,7 @@ package com.example.zxpay.chaiyilora;
 public class MainAdvanceIndoorQuery extends AppCompatActivity implements Button.OnClickListener,
         RadioGroup.OnCheckedChangeListener{
 
-    private int ButtonID[] = {R.id.BT_BACK};
+    private int ButtonID[] = {R.id.BT_BACK, R.id.BT_PLOT};
     boolean DEBUG = true;
     Map<String, String> Temp_Datai = new LinkedHashMap<String, String>();  // i => indoor
     Map<String, String> Humi_Datai = new LinkedHashMap<String, String>();
@@ -57,12 +58,15 @@ public class MainAdvanceIndoorQuery extends AppCompatActivity implements Button.
     private String location_name = "DNS";
     private String LPG_name = "LPG";
     private String dust_name = "PM";
-    private int show_data_type = 0; // 0 ；indoor , 1：outdoor
+    boolean it_flag = false;
 
     RadioGroup mygroup;
     TextView show_data;
+    Intent it_save;
+    Toast toast;
+
     private EditText EditText_date;
-    private int mYear, mMonth, mDay, mHour, mMinute;
+    private int mYear, mMonth, mDay;
 
     String query_name = "Temperature";
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -89,9 +93,11 @@ public class MainAdvanceIndoorQuery extends AppCompatActivity implements Button.
         show_data = (TextView) findViewById(R.id.TXV_SHOW);
 
         choose_date = Get_Now();
+
         EditText_date.setText(choose_date);
         advanced_update();
     }
+
 
     private String Get_Now(){
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -177,6 +183,7 @@ public class MainAdvanceIndoorQuery extends AppCompatActivity implements Button.
                         }
                         else {
                             show_data.setText("未Query到資料");
+                            it_flag = false;
                         }
                     }
                     else {
@@ -324,9 +331,13 @@ public class MainAdvanceIndoorQuery extends AppCompatActivity implements Button.
 
     private void advance_show(Map myparameter, String query_para, String query_unit){
         Log.e("Show", "Data Show");
+        ArrayList<String> key_all = new ArrayList<>();
+        ArrayList<String> value_all = new ArrayList<>();
         String msg = query_para+"\n";
         if(!myparameter.isEmpty()){
             for (Object key:myparameter.keySet() ) {
+                key_all.add(key.toString());
+                value_all.add(myparameter.get(key).toString());
                 msg += key;
                 msg += "\uD83D\uDC49";
                 msg += myparameter.get(key);
@@ -334,8 +345,17 @@ public class MainAdvanceIndoorQuery extends AppCompatActivity implements Button.
                 msg += "\n";
             }
             show_data.setText(msg);
+            it_save = new Intent(this, MainActivityPlotData.class);
+            it_save.putExtra("database", "Indoor");
+            it_save.putExtra("keys", key_all);
+            it_save.putExtra("values", value_all);
+            it_save.putExtra("unit", query_unit);
+            it_save.putExtra("parameter", query_name);
+            it_save.putExtra("date", choose_date);
+            it_flag = true;
         }
         else {
+            it_flag = false;
             Log.e("Data", "No Show");
             show_data.setText("");
         }
@@ -359,7 +379,20 @@ public class MainAdvanceIndoorQuery extends AppCompatActivity implements Button.
                 if(DEBUG) Log.e("Button", "Indoor Back Click");
                 Intent intent_back = new Intent();
                 intent_back.setClass(MainAdvanceIndoorQuery.this, MainActivity.class);
-                startActivity(intent_back);
+                finish();
+                break;
+            case R.id.BT_PLOT:
+                if(it_flag){
+                    startActivityForResult(it_save, 123);
+                }
+                else {
+                    if(toast!=null){
+                        toast.cancel();
+                    }
+                    toast = toast.makeText(getApplicationContext(), "No data found!!!Please try again..."
+                            , Toast.LENGTH_SHORT);
+                    toast.show();
+                }
                 break;
             case R.id.EDIT_DATE:
                 if(DEBUG) Log.e("Button", "Edit Test Click");

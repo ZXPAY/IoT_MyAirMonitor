@@ -11,7 +11,7 @@
     <ScrollView
         android:id="@+id/SECOND_SCROLLVIEW"
         android:layout_width="wrap_content"
-        android:layout_height="350dp"
+        android:layout_height="388dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -98,7 +98,7 @@
     <ScrollView
         android:id="@+id/FIRST_SCROLLVIEW"
         android:layout_width="145dp"
-        android:layout_height="354dp"
+        android:layout_height="387dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toStartOf="@+id/SECOND_SCROLLVIEW"
         app:layout_constraintHorizontal_bias="0.5"
@@ -205,42 +205,15 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="wrap_content"
+        android:layout_width="357dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:layout_marginBottom="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/FIRST_SCROLLVIEW">
-
-        <RelativeLayout
-            android:id="@+id/relativeLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/BT_ADVANCE_QUERY">
-
-            <Button
-                android:id="@+id/BT_DATA_UPDATE"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="最新資料更新" />
-
-            <Button
-                android:id="@+id/BT_TRANS_NEW_WINDOW"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/BT_DATA_UPDATE"
-                android:text="室內資料呈現" />
-
-        </RelativeLayout>
+        app:layout_constraintTop_toBottomOf="@+id/SECOND_SCROLLVIEW">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -252,8 +225,15 @@
             tools:layout_editor_absoluteY="416dp">
 
             <Button
+                android:id="@+id/BT_DATA_UPDATE"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="最新資料更新" />
+
+            <Button
                 android:id="@+id/BT_ADVANCE_QUERY"
-                android:layout_width="0dp"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="進階資料查詢"
@@ -265,7 +245,7 @@
 
             <Button
                 android:id="@+id/BT_LOOK_DATA_DETAILS"
-                android:layout_width="0dp"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="詳細資料"

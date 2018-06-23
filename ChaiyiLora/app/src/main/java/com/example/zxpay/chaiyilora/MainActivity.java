@@ -57,7 +57,7 @@ import java.util.concurrent.ExecutionException;
         PM
 */
 public class MainActivity extends AppCompatActivity implements Button.OnClickListener{
-    int ButtonID[] = {R.id.BT_DATA_UPDATE, R.id.BT_TRANS_NEW_WINDOW,R.id.BT_INDOOR_LABEL,R.id.BT_OUTDOOR_LABEL
+    int ButtonID[] = {R.id.BT_DATA_UPDATE, R.id.BT_INDOOR_LABEL,R.id.BT_OUTDOOR_LABEL
             ,R.id.BT_LOOK_DATA_DETAILS, R.id.BT_ADVANCE_QUERY};
 
     int OutDoor_TXVID[] = {R.id.TXV_CO, R.id.TXV_CO2, R.id.TXV_DUST, R.id.TXV_LPG, R.id.TXV_PRESSURE};
@@ -133,25 +133,12 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         Log.e("Now", Get_Now());   // now
 
-        // Indoor data and Outdoor data initialize.
-//        Indoor_Data.put(temp_name, "0");
-//        Indoor_Data.put(humidity_name, "0");
-//        Outdoor_Data.put(temp_name, "0");
-//        Outdoor_Data.put(humidity_name, "0");
-//        Outdoor_Data.put(CO_name, "0");
-//        Outdoor_Data.put(CO2_name, "0");
-//        Outdoor_Data.put(pressure_name, "0");
-//        Outdoor_Data.put(location_name, "0");
-//        Outdoor_Data.put(LPG_name, "0");
-//        Outdoor_Data.put(dust_name, "0");
-
         for(int id:ButtonID){
             Button bt = findViewById(id);
             bt.setOnClickListener(this);
         }
         indoor_array = getResources().getStringArray(R.array.Indoor_Data);
         outdoor_array = getResources().getStringArray(R.array.Outdoor_Data);
-        btn_new_window = findViewById(R.id.BT_TRANS_NEW_WINDOW);
 
         myQuery.VERBOSE = false;
         show_data_type = CHOOSE_INDOOR;
@@ -602,22 +589,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                 //data_update();
 
                 break;
-            case R.id.BT_TRANS_NEW_WINDOW:
-                if (show_data_type == CHOOSE_INDOOR)
-                {
-                    if(DEBUG) Log.e("Button", "New Window Button IN Click");
-                    Intent intent_indoor = new Intent();
-                    intent_indoor.setClass(MainActivity.this, MainActivityIndoor.class);
-                    startActivity(intent_indoor);
-                }
-                else
-                {
-                    if(DEBUG) Log.e("Button", "New Window Button OUT Click");
-                    Intent intent_outdoor = new Intent();
-                    intent_outdoor.setClass(MainActivity.this, MainActivityOutdoor.class);
-                    startActivity(intent_outdoor);
-                }
-                break;
 
             case R.id.BT_INDOOR_LABEL:
                 try {
@@ -668,14 +639,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                     startActivity(intent_outdoor);
                 }
                 break;
-            /*
-            case R.id.BT_TRANS_NEW_WINDOW_OUT:
-                if(DEBUG) Log.e("Button", "New Window Button OUT Click");
-                Intent intent_outdoor = new Intent();
-                intent_outdoor.setClass(MainActivity.this, MainActivityOutdoor.class);
-                startActivity(intent_outdoor);
-                break;
-             */
             default:
                 Log.e("Button", "No button Click Found !!!");
                 break;

@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -33,7 +34,7 @@ import java.util.Map;
 public class MainAdvanceOutdoorQuery extends AppCompatActivity implements Button.OnClickListener,
                         RadioGroup.OnCheckedChangeListener{
 
-    int ButtonID[] = {R.id.BT_BACK};
+    int ButtonID[] = {R.id.BT_BACK, R.id.BT_PLOT};
     boolean DEBUG = true;
     Map<String, String> Temp_Datai = new LinkedHashMap<String, String>();  // i => indoor
     Map<String, String> Humi_Datai = new LinkedHashMap<String, String>();
@@ -62,8 +63,13 @@ public class MainAdvanceOutdoorQuery extends AppCompatActivity implements Button
 
     RadioGroup mygroup;
     TextView show_data;
+    Intent it_save;
+    Toast toast;
+
+    boolean it_flag = false;
+
     private EditText EditText_date;
-    private int mYear, mMonth, mDay, mHour, mMinute;
+    private int mYear, mMonth, mDay;
 
     String query_name = "Temperature";
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -90,6 +96,7 @@ public class MainAdvanceOutdoorQuery extends AppCompatActivity implements Button
         show_data = (TextView) findViewById(R.id.TXV_SHOW);
 
         choose_date = Get_Now();
+
         EditText_date.setText(choose_date);
         advanced_update();
 
@@ -178,6 +185,7 @@ public class MainAdvanceOutdoorQuery extends AppCompatActivity implements Button
                         }
                         else {
                             show_data.setText("未Query到資料");
+                            it_flag = false;
                         }
                     }
                     else {
@@ -325,18 +333,31 @@ public class MainAdvanceOutdoorQuery extends AppCompatActivity implements Button
 
     private void advance_show(Map myparameter, String query_para, String query_unit){
         Log.e("Show", "Data Show");
+        ArrayList<String> key_all = new ArrayList<>();
+        ArrayList<String> value_all = new ArrayList<>();
         String msg = query_para+"\n";
         if(!myparameter.isEmpty()){
             for (Object key:myparameter.keySet() ) {
+                key_all.add(key.toString());
+                value_all.add(myparameter.get(key).toString());
                 msg += key;
                 msg += "\uD83D\uDC49";
                 msg += myparameter.get(key);
                 msg += query_unit;
                 msg += "\n";
+                it_save = new Intent(this, MainActivityPlotData.class);
+                it_save.putExtra("database", "Outdoor");
+                it_save.putExtra("keys", key_all);
+                it_save.putExtra("values", value_all);
+                it_save.putExtra("unit", query_unit);
+                it_save.putExtra("parameter", query_name);
+                it_save.putExtra("date", choose_date);
+                it_flag = true;
             }
             show_data.setText(msg);
         }
         else {
+            it_flag = false;
             Log.e("Data", "No Show");
             show_data.setText("");
         }
@@ -381,14 +402,23 @@ public class MainAdvanceOutdoorQuery extends AppCompatActivity implements Button
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.BT_QUERY:
-                Log.e("Query", "Outdoor Query Data.");
-
-                break;
             case R.id.BT_BACK:
                 Intent intent_back = new Intent();
                 intent_back.setClass(MainAdvanceOutdoorQuery.this, MainActivity.class);
-                startActivity(intent_back);
+                finish();
+                break;
+            case R.id.BT_PLOT:
+                if(it_flag){
+                    startActivityForResult(it_save, 123);
+                }
+                else {
+                    if(toast!=null){
+                        toast.cancel();
+                    }
+                    toast = toast.makeText(getApplicationContext(), "No data found!!!Please try again..."
+                            , Toast.LENGTH_SHORT);
+                    toast.show();
+                }
                 break;
             case R.id.EDIT_DATE:
                 if(DEBUG) Log.e("Button", "Edit Test Click");
