@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ChaiyiLora</string>
+    <string name="app_name">MY空氣監測站</string>
     <string-array name="Indoor_Data">
         <item>溫度 Temperature</item>
         <item>濕度 Humidity</item>

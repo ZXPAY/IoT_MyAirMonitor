@@ -1,12 +1,14 @@
 package com.example.zxpay.chaiyilora;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -41,6 +43,11 @@ public class MainActivityPlotData extends AppCompatActivity implements Button.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_plot_data);
+        // Orientation will not change when the cell phone tilt.
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        // Cell phone will keep screen on.
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         for(int id:ButtonID){
             Button btn = (Button) findViewById(id);
@@ -68,6 +75,12 @@ public class MainActivityPlotData extends AppCompatActivity implements Button.On
 
     private void Draw(ArrayList key_list, ArrayList value_list){
         int data_numbers = 0;
+        float mean_data = 0;
+        float max_data = 0;
+        float min_data = 0;
+        float sum_data = 0;
+        float max_minus_min = 0;
+        float data = 0;
         Date d1 = new Date();
         Date d2 = new Date();
         PointsGraphSeries<DataPoint> series_point = new PointsGraphSeries<DataPoint>();
@@ -85,7 +98,7 @@ public class MainActivityPlotData extends AppCompatActivity implements Button.On
             String mon, day;
             Date date = new Date();
             data_numbers = key_list.size();
-            TXV_STRING += "資料個數 : " + String.valueOf(data_numbers);
+            TXV_STRING += "資料個數 : " + String.valueOf(data_numbers) + "\n";
             for(int i=0;i<data_numbers;i++){
                 mon = key_list.get(i).toString().substring(5,7);
                 day = key_list.get(i).toString().substring(8,10);
@@ -98,14 +111,34 @@ public class MainActivityPlotData extends AppCompatActivity implements Button.On
                     Log.e("Error", "transfer to date error ...");
                     e.printStackTrace();
                 }
-                if(i==0) d1 = date;
+
+                data = Float.parseFloat(value_list.get(i).toString());
+
+                sum_data += data;
+                if(i==0) {
+                    d1 = date;
+                    min_data = data;
+                }
                 else if(i==(data_numbers-1)) d2 = date;
 
+                if(data >= max_data){
+                    max_data = data;
+                }
+                else if(data <= min_data){
+                    min_data = data;
+                }
                 series_point.appendData(new DataPoint(i, Float.parseFloat(value_list.get(i).toString()))
                         , true, number_to_show);
                 series_line.appendData(new DataPoint(i, Float.parseFloat(value_list.get(i).toString()))
                         , true, number_to_show);
             }
+            mean_data = sum_data/data_numbers;
+            max_minus_min = max_data - min_data;
+            TXV_STRING += "最大值 : " + String.format("%.2f", max_data) + para_unit + "\n";
+            TXV_STRING += "最小值 : " + String.format("%.2f", min_data) + para_unit + "\n";
+            TXV_STRING += "最大-最小 : " + String.format("%.2f", max_minus_min) + para_unit + "\n";
+            TXV_STRING += "平均值 : " + String.format("%.2f", mean_data) + para_unit + "\n";
+
             graph.getViewport().setMinX(0);
             graph.getViewport().setMaxX(data_numbers);
             graph.getViewport().setXAxisBoundsManual(true);

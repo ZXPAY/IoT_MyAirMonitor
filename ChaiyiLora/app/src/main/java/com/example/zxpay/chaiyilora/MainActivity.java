@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.anastr.speedviewlib.AwesomeSpeedometer;
 import com.github.anastr.speedviewlib.DeluxeSpeedView;
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     int OutDoor_TXVID[] = {R.id.TXV_CO, R.id.TXV_CO2, R.id.TXV_DUST, R.id.TXV_LPG, R.id.TXV_PRESSURE};
 
     TextView outdoor_txv;
+    TextView txv_show_time;
 
     final boolean DEBUG = true;
 
@@ -107,8 +109,12 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     SpeedView gauge_lpg;
     DeluxeSpeedView gauge_pm;
     RaySpeedometer gauge_pressure;
+    Toast toast;
 
     ScrollView first_scrollview, second_scrollview;
+
+    private long timei = System.currentTimeMillis();
+    int polling_time = 500;   // Query 資料間隔 500 millis
 
 
 
@@ -139,6 +145,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         }
         indoor_array = getResources().getStringArray(R.array.Indoor_Data);
         outdoor_array = getResources().getStringArray(R.array.Outdoor_Data);
+        txv_show_time = (TextView) findViewById(R.id.TXV_SHOW_TIME);
 
         myQuery.VERBOSE = false;
         show_data_type = CHOOSE_INDOOR;
@@ -467,8 +474,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
                         }
                     }
-
-                    show_data(0);
                     break;
                 case 2:
 
@@ -498,6 +503,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
             myQuery.Query(ref, time_name, "<=", Get_Now(), 1, "DESCENDING");
             ref = db.collection(UsingIndoor+location_name);
             myQuery.Query(ref, time_name, "<=", Get_Now(), 1, "DESCENDING");
+            txv_show_time.setText("最後更新時間 : " + Get_Now());
         }
         else if(show_data_type == CHOOSE_OUTDOOR){
             myQuery.mode = 1;
@@ -505,6 +511,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
             myQuery.Query(ref, time_name, "<=", Get_Now(), 1, "DESCENDING");
             ref = db.collection(UsingOutdoor+humidity_name);
             myQuery.Query(ref, time_name, "<=", Get_Now(), 1, "DESCENDING");
+            txv_show_time.setText("最後更新時間 : " + Get_Now());
         }
         else{
             Log.e("show_data_type", "Not found Query show_data_type.");
@@ -518,103 +525,136 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     private String PrepareShowData(Map data){
         String Reture_MSG = "";
         if(!data.isEmpty()){
-//            Log.e("Pre", data.toString());
+            try{
+                //            Log.e("Pre", data.toString());
 //            Log.e("Pre Length", String.valueOf(data.toString().length()));
-            Reture_MSG = data.toString().replace("}"," ").substring(1,Temp_Datai.toString().length()-1);
-            Reture_MSG = Reture_MSG.replace("=", "\uD83D\uDC49");
-            //Log.e("Return MSG", Reture_MSG);
+                Reture_MSG = data.toString().replace("}"," ").substring(1,Temp_Datai.toString().length()-1);
+                Reture_MSG = Reture_MSG.replace("=", "\uD83D\uDC49");
+                //Log.e("Return MSG", Reture_MSG);
+            }
+            catch (Exception e){
+                Log.e("Error", "Prepare data error");
+                e.printStackTrace();
+            }
         }
         return Reture_MSG;
     }
-    private void show_data(int mode){
-        switch (mode){
-            case 0:
-                String msg = "";
-                String pre_msg;
-                if(show_data_type == CHOOSE_INDOOR){
-                    msg+="溫度 Temperature\n";
-                    pre_msg = PrepareShowData(Temp_Datai);
-                    msg += pre_msg+" \u00b0"+"C"+"\n";
-                    msg+="濕度 Humidity\n";
-                    pre_msg = PrepareShowData(Humi_Datai);
-                    msg+=pre_msg+" %";
-                }
-                else if(show_data_type == CHOOSE_OUTDOOR){
-                    msg+="溫度 Temperature\n";
-                    pre_msg = PrepareShowData(Temp_Datao);
-                    msg += pre_msg+" \u00b0"+"C"+"\n";
-                    msg+="濕度 Humidity\n";
-                    pre_msg = PrepareShowData(Humi_Datao);
-                    msg+=pre_msg+" %\n";
-                    msg+="一氧化碳 Carbon Monoxide\n";
-                    pre_msg = PrepareShowData(CO_Data);
-                    msg+=pre_msg+" ppm\n";
-                    msg+="二氧化碳 Carbon Dioxide\n";
-                    pre_msg = PrepareShowData(CO2_Data);
-                    msg+=pre_msg+" ppm\n";
-                    msg+="瓦斯 LPG\n";
-                    pre_msg = PrepareShowData(LPG_Data);
-                    msg+=pre_msg+" ppm\n";
-                    msg+="空氣微粒 PM\n";
-                    pre_msg = PrepareShowData(Dust_Data);
-                    msg+=pre_msg+"\u00b5"+"g/m"+"\u00b3"+"\n";
-                    msg+="大氣壓力 Pressure\n";
-                    pre_msg = PrepareShowData(Pressure_Data);
-                    msg+=pre_msg+" pa";
-//                    msg+="經緯度 Location\n";
-//                    pre_msg = PrepareShowData(Loc_Data);
-//                    msg+=pre_msg+"";
-                }
-                //Log.e("MSG",msg);
-//                show_data.setText(msg);
-                break;
-            case 1:
-
-                break;
-
-                default:
-
-                    break;
-
-        }
-
-    }
-
+//    private void show_data(int mode){
+//        switch (mode){
+//            case 0:
+//                String msg = "";
+//                String pre_msg;
+//                if(show_data_type == CHOOSE_INDOOR){
+//                    msg+="溫度 Temperature\n";
+//                    pre_msg = PrepareShowData(Temp_Datai);
+//                    msg += pre_msg+" \u00b0"+"C"+"\n";
+//                    msg+="濕度 Humidity\n";
+//                    pre_msg = PrepareShowData(Humi_Datai);
+//                    msg+=pre_msg+" %";
+//                }
+//                else if(show_data_type == CHOOSE_OUTDOOR){
+//                    msg+="溫度 Temperature\n";
+//                    pre_msg = PrepareShowData(Temp_Datao);
+//                    msg += pre_msg+" \u00b0"+"C"+"\n";
+//                    msg+="濕度 Humidity\n";
+//                    pre_msg = PrepareShowData(Humi_Datao);
+//                    msg+=pre_msg+" %\n";
+//                    msg+="一氧化碳 Carbon Monoxide\n";
+//                    pre_msg = PrepareShowData(CO_Data);
+//                    msg+=pre_msg+" ppm\n";
+//                    msg+="二氧化碳 Carbon Dioxide\n";
+//                    pre_msg = PrepareShowData(CO2_Data);
+//                    msg+=pre_msg+" ppm\n";
+//                    msg+="瓦斯 LPG\n";
+//                    pre_msg = PrepareShowData(LPG_Data);
+//                    msg+=pre_msg+" ppm\n";
+//                    msg+="空氣微粒 PM\n";
+//                    pre_msg = PrepareShowData(Dust_Data);
+//                    msg+=pre_msg+"\u00b5"+"g/m"+"\u00b3"+"\n";
+//                    msg+="大氣壓力 Pressure\n";
+//                    pre_msg = PrepareShowData(Pressure_Data);
+//                    msg+=pre_msg+" pa";
+////                    msg+="經緯度 Location\n";
+////                    pre_msg = PrepareShowData(Loc_Data);
+////                    msg+=pre_msg+"";
+//                }
+//                //Log.e("MSG",msg);
+////                show_data.setText(msg);
+//                break;
+//            case 1:
+//
+//                break;
+//
+//                default:
+//
+//                    break;
+//
+//        }
+//
+//    }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.BT_DATA_UPDATE:
-                Log.e("Button", "Data Update ...");
-                //data_update();
-
+                if((System.currentTimeMillis() - timei) > polling_time){
+                    Log.e("Button", "Data Update ...");
+                    data_update();
+                    timei = System.currentTimeMillis();
+                }
+                else {
+                    if(toast != null){
+                        toast.cancel();
+                    }
+                    toast = Toast.makeText(getApplicationContext(), "Please Query data later...", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
                 break;
 
             case R.id.BT_INDOOR_LABEL:
-                try {
-                    if(DEBUG) Log.e("Button", "BT_Indoor");
-                    show_data_type = CHOOSE_INDOOR;
-                    Indoor_Mode();
-                    findViewById(R.id.BT_INDOOR_LABEL).setBackgroundColor(getResources().getColor(R.color.colorW,null));
-                    findViewById(R.id.BT_OUTDOOR_LABEL).setBackgroundColor(getResources().getColor(R.color.colorG,null));
-                    data_update();
+                if((System.currentTimeMillis() - timei) > polling_time){
+                    try {
+                        if(DEBUG) Log.e("Button", "BT_Indoor");
+                        show_data_type = CHOOSE_INDOOR;
+                        Indoor_Mode();
+                        findViewById(R.id.BT_INDOOR_LABEL).setBackgroundColor(getResources().getColor(R.color.colorW,null));
+                        findViewById(R.id.BT_OUTDOOR_LABEL).setBackgroundColor(getResources().getColor(R.color.colorG,null));
+                        data_update();
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    timei = System.currentTimeMillis();
                 }
-                catch (Exception e){
-                    e.printStackTrace();
+                else {
+                    if(toast != null){
+                        toast.cancel();
+                    }
+                    toast = Toast.makeText(getApplicationContext(), "Please Query data later...", Toast.LENGTH_SHORT);
+                    toast.show();
                 }
                 break;
             case R.id.BT_OUTDOOR_LABEL:
-                try {
-                    if(DEBUG) Log.e("Button", "BT_Outdoor");
-                    show_data_type = CHOOSE_OUTDOOR;
-                    Outdoor_Mode();
-                    findViewById(R.id.BT_INDOOR_LABEL).setBackgroundColor(getResources().getColor(R.color.colorG,null));
-                    findViewById(R.id.BT_OUTDOOR_LABEL).setBackgroundColor(getResources().getColor(R.color.colorW,null));
-                    btn_new_window.setText("室外資料呈現");
-                    data_update();
+                if((System.currentTimeMillis() - timei) > polling_time){
+                    try {
+                        if(DEBUG) Log.e("Button", "BT_Outdoor");
+                        show_data_type = CHOOSE_OUTDOOR;
+                        Outdoor_Mode();
+                        findViewById(R.id.BT_INDOOR_LABEL).setBackgroundColor(getResources().getColor(R.color.colorG,null));
+                        findViewById(R.id.BT_OUTDOOR_LABEL).setBackgroundColor(getResources().getColor(R.color.colorW,null));
+                        data_update();
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    timei = System.currentTimeMillis();
                 }
-                catch (Exception e){
-                    e.printStackTrace();
+                else {
+                    if(toast != null){
+                        toast.cancel();
+                    }
+                    toast = Toast.makeText(getApplicationContext(), "Please Query data later...", Toast.LENGTH_SHORT);
+                    toast.show();
                 }
                 break;
             case R.id.BT_LOOK_DATA_DETAILS:
@@ -645,13 +685,13 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         }
     }
 
-    public void Query_Test(View view){
-        Log.e("Button", "Click");
-        CollectionReference ref = db.collection("/OutDoor/0000000012000007/CO2");
-        MyQuery a = new MyQuery();
-        a.mode = 1;
-        a.Query(ref, "time", "<=", "2018-06-17 15:00:00", 10, "DESCENDING");
-        Log.e("Run", "OK");
-    }
+//    public void Query_Test(View view){
+//        Log.e("Button", "Click");
+//        CollectionReference ref = db.collection("/OutDoor/0000000012000007/CO2");
+//        MyQuery a = new MyQuery();
+//        a.mode = 1;
+//        a.Query(ref, "time", "<=", "2018-06-17 15:00:00", 10, "DESCENDING");
+//        Log.e("Run", "OK");
+//    }
 
 }

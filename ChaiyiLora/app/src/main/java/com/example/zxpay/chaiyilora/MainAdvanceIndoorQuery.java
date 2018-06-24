@@ -3,11 +3,13 @@ package com.example.zxpay.chaiyilora;
     import android.app.DatePickerDialog;
     import android.app.TimePickerDialog;
     import android.content.Intent;
+    import android.content.pm.ActivityInfo;
     import android.support.annotation.NonNull;
     import android.support.v7.app.AppCompatActivity;
     import android.os.Bundle;
     import android.util.Log;
     import android.view.View;
+    import android.view.WindowManager;
     import android.widget.Button;
     import android.widget.DatePicker;
     import android.widget.EditText;
@@ -78,6 +80,11 @@ public class MainAdvanceIndoorQuery extends AppCompatActivity implements Button.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_advance_indoor_query);
+        // Orientation will not change when the cell phone tilt.
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        // Cell phone will keep screen on.
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         for(int id:ButtonID){
             Button btn = (Button) findViewById(id);
