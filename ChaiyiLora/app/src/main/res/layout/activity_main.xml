@@ -25,45 +25,11 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/TXV_CO"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="一氧化碳"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-            <com.github.anastr.speedviewlib.AwesomeSpeedometer
-                android:id="@+id/GAUGE_CO"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                app:sv_withTremble="false"
-                tools:layout_editor_absoluteX="260dp"
-                tools:layout_editor_absoluteY="271dp" />
-
-            <TextView
-                android:id="@+id/TXV_LPG"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="\n瓦斯"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-            <com.github.anastr.speedviewlib.SpeedView
-                android:id="@+id/GAUGE_LPG"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                app:sv_withTremble="false"
-                tools:layout_editor_absoluteX="273dp"
-                tools:layout_editor_absoluteY="155dp" />
-
-            <TextView
                 android:id="@+id/TXV_DUST"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="\nPM"
+                android:text="PM"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -93,6 +59,42 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:sv_withTremble="false"
                 tools:layout_editor_absoluteY="373dp" />
+
+            <TextView
+                android:id="@+id/TXV_CO"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="\n一氧化碳"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <com.github.anastr.speedviewlib.AwesomeSpeedometer
+                android:id="@+id/GAUGE_CO"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                app:sv_withTremble="false"
+                tools:layout_editor_absoluteX="260dp"
+                tools:layout_editor_absoluteY="271dp" />
+
+            <TextView
+                android:id="@+id/TXV_LPG"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="\n瓦斯"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <com.github.anastr.speedviewlib.SpeedView
+                android:id="@+id/GAUGE_LPG"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                app:sv_withTremble="false"
+                tools:layout_editor_absoluteX="273dp"
+                tools:layout_editor_absoluteY="155dp" />
+
+
         </LinearLayout>
     </ScrollView>
 
@@ -120,14 +122,14 @@
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
-            <com.github.anastr.speedviewlib.TubeSpeedometer
+            <com.github.anastr.speedviewlib.ImageLinearGauge
                 android:id="@+id/GAUGE_TEMP"
                 android:layout_width="150dp"
                 android:layout_height="140dp"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-
+                app:sv_image="@drawable/fire"
                 app:sv_withTremble="false"
                 tools:layout_editor_absoluteY="76dp" />
 
@@ -140,12 +142,12 @@
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
-            <com.github.anastr.speedviewlib.TubeSpeedometer
+            <com.github.anastr.speedviewlib.ImageLinearGauge
                 android:id="@+id/GAUGE_HUMIDITY"
                 android:layout_width="150dp"
                 android:layout_height="140dp"
                 android:visibility="visible"
-
+                app:sv_image="@drawable/water"
                 app:sv_textSize="20dp"
                 app:sv_withTremble="false"
                 tools:layout_editor_absoluteX="285dp"

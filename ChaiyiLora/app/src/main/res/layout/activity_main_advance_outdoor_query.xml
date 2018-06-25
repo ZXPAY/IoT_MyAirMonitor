@@ -62,7 +62,7 @@
     <RadioGroup
         android:id="@+id/RADIO_GROUP"
         android:layout_width="109dp"
-        android:layout_height="101dp"
+        android:layout_height="162dp"
         android:layout_marginBottom="262dp"
         android:layout_marginTop="11dp"
         android:orientation="vertical"
@@ -89,6 +89,26 @@
             android:layout_weight="1"
             android:checked="false"
             android:text="濕度"
+            tools:layout_editor_absoluteX="225dp"
+            tools:layout_editor_absoluteY="90dp" />
+
+        <RadioButton
+            android:id="@+id/RBT_PM"
+            android:layout_width="match_parent"
+            android:layout_height="31dp"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="空氣微粒"
+            tools:layout_editor_absoluteX="225dp"
+            tools:layout_editor_absoluteY="90dp" />
+
+        <RadioButton
+            android:id="@+id/RBT_PRESSURE"
+            android:layout_width="match_parent"
+            android:layout_height="31dp"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="壓力"
             tools:layout_editor_absoluteX="225dp"
             tools:layout_editor_absoluteY="90dp" />
 

@@ -2,9 +2,12 @@ package com.example.zxpay.chaiyilora;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -62,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     int ButtonID[] = {R.id.BT_DATA_UPDATE, R.id.BT_INDOOR_LABEL,R.id.BT_OUTDOOR_LABEL
             ,R.id.BT_LOOK_DATA_DETAILS, R.id.BT_ADVANCE_QUERY};
 
-    int OutDoor_TXVID[] = {R.id.TXV_CO, R.id.TXV_CO2, R.id.TXV_DUST, R.id.TXV_LPG, R.id.TXV_PRESSURE};
+    int OutDoor_TXVID[] = {R.id.TXV_CO, R.id.TXV_CO2, R.id.TXV_LPG};
 
     TextView outdoor_txv;
     TextView txv_show_time;
@@ -72,8 +75,8 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     private final int CHOOSE_INDOOR = 1;
     private final int CHOOSE_OUTDOOR = 0;
 
-    private String UsingOutdoor = "/InDoor/0000000012000008/";
-    private String UsingIndoor = "/OutDoor/0000000012000007/";
+    private String UsingOutdoor = "/OutDoor/0000000012000007/";
+    private String UsingIndoor = "/InDoor/0000000012000008/";
 
     private String time_name = "time";
     private String rssi_name = "rssi";
@@ -99,12 +102,16 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     Map<String, String> CO_Data = new HashMap<String, String>();
     Map<String, String> CO2_Data = new HashMap<String, String>();
     Map<String, String> Pressure_Data = new HashMap<String, String>();
+    Map<String, String> Pressure_Datao = new HashMap<String, String>();
     Map<String, String> Loc_Data = new HashMap<String, String>();
     Map<String, String> Dust_Data = new HashMap<String, String>();
+    Map<String, String> Dust_Datao = new HashMap<String, String>();
+
 
     //TextView show_indoor, show_outdoor;
     Button btn_new_window;
-    TubeSpeedometer gauge_humidity, gauge_temperature;
+    ImageLinearGauge gauge_humidity;
+    ImageLinearGauge gauge_temperature;
     ProgressiveGauge gauge_co2;
     AwesomeSpeedometer gauge_co;
     SpeedView gauge_lpg;
@@ -151,8 +158,8 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         myQuery.VERBOSE = false;
         show_data_type = CHOOSE_INDOOR;
         data_update();
-        gauge_humidity = (TubeSpeedometer ) findViewById(R.id.GAUGE_HUMIDITY);
-        //gauge_humidity.setOrientation(LinearGauge.Orientation.VERTICAL);
+        gauge_humidity = (ImageLinearGauge ) findViewById(R.id.GAUGE_HUMIDITY);
+        gauge_humidity.setOrientation(LinearGauge.Orientation.VERTICAL);
         gauge_humidity.setSpeedTextPosition(Gauge.Position.TOP_CENTER);
         gauge_humidity.setUnitTextSize(50);
         gauge_humidity.setSpeedTextSize(50);
@@ -160,8 +167,8 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         gauge_humidity.setMaxSpeed(100);
         gauge_humidity.setMinSpeed(0);
 
-        gauge_temperature = (TubeSpeedometer ) findViewById(R.id.GAUGE_TEMP);
-        //gauge_temperature.setOrientation(LinearGauge.Orientation.HORIZONTAL);
+        gauge_temperature = (ImageLinearGauge) findViewById(R.id.GAUGE_TEMP);
+        gauge_temperature.setOrientation(LinearGauge.Orientation.HORIZONTAL);
         gauge_temperature.setSpeedTextPosition(Gauge.Position.TOP_CENTER);
         gauge_temperature.setUnit("\u00b0"+"C");
         gauge_temperature.setMaxSpeed(50);
@@ -211,14 +218,24 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         gauge_co.setVisibility(gauge_co.INVISIBLE);
         gauge_co2.setVisibility(gauge_co2.INVISIBLE);
         gauge_lpg.setVisibility(gauge_lpg.INVISIBLE);
-        gauge_pm.setVisibility(gauge_pm.INVISIBLE);
-        gauge_pressure.setVisibility(gauge_pressure.INVISIBLE);
-        second_scrollview.setVisibility(second_scrollview.INVISIBLE);
+        gauge_pm.setVisibility(gauge_pm.VISIBLE);
+        gauge_pressure.setVisibility(gauge_pressure.VISIBLE);
         for(int id:OutDoor_TXVID){
             outdoor_txv = (TextView) findViewById(id);
             outdoor_txv.setVisibility(outdoor_txv.INVISIBLE);
         }
+        Button Bt_outdoor = findViewById(R.id.BT_OUTDOOR_LABEL);
+        Bt_outdoor.setBackgroundColor(getResources().getColor(R.color.colorG, null));
+        Bt_outdoor.setTextColor(Color.RED);
+        Bt_outdoor.setTypeface(Typeface.DEFAULT_BOLD);
+        String htmlString="<u>"+Bt_outdoor.getText().toString()+"</u>";
+        Bt_outdoor.setText(Html.fromHtml(htmlString));
 
+        Button Bt_indoor = findViewById(R.id.BT_INDOOR_LABEL);
+        Bt_indoor.setBackgroundColor(getResources().getColor(R.color.colorW, null));
+        Bt_indoor.setTextColor(Color.BLACK);
+        Bt_indoor.setTypeface(Typeface.DEFAULT);
+        Bt_indoor.setText(Bt_indoor.getText().toString());
     }
     private  void Indoor_Mode(){
         gauge_co.setVisibility(gauge_co.VISIBLE);
@@ -231,6 +248,18 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
             outdoor_txv = (TextView) findViewById(id);
             outdoor_txv.setVisibility(outdoor_txv.VISIBLE);
         }
+        Button Bt_indoor = findViewById(R.id.BT_INDOOR_LABEL);
+        Bt_indoor.setBackgroundColor(getResources().getColor(R.color.colorG, null));
+        Bt_indoor.setTextColor(Color.RED);
+        Bt_indoor.setTypeface(Typeface.DEFAULT_BOLD);
+        String htmlString="<u>"+Bt_indoor.getText().toString()+"</u>";
+        Bt_indoor.setText(Html.fromHtml(htmlString));
+
+        Button Bt_outdoor = findViewById(R.id.BT_OUTDOOR_LABEL);
+        Bt_outdoor.setBackgroundColor(getResources().getColor(R.color.colorW, null));
+        Bt_outdoor.setTextColor(Color.BLACK);
+        Bt_outdoor.setTypeface(Typeface.DEFAULT);
+        Bt_outdoor.setText(Bt_outdoor.getText().toString());
     }
 
     private String Get_Now(){
@@ -468,7 +497,12 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                         }
                     }
                     if(!dust.isEmpty()){
-                        if(show_data_type == CHOOSE_OUTDOOR);
+                        if(show_data_type == CHOOSE_OUTDOOR){
+                            for(int i=0;i<dust.size();i++){
+                                Dust_Datao.put(t.get(i), dust.get(i));
+                                gauge_pm.speedTo(Float.parseFloat(dust.get(i)));
+                            }
+                        }
                         else if(show_data_type == CHOOSE_INDOOR){
                             for(int i=0;i<dust.size();i++){
                                 Dust_Data.put(t.get(i), dust.get(i));
@@ -478,7 +512,12 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                         }
                     }
                     if(!pressure.isEmpty()){
-                        if(show_data_type == CHOOSE_OUTDOOR);
+                        if(show_data_type == CHOOSE_OUTDOOR){
+                            for(int i=0;i<pressure.size();i++){
+                                Pressure_Datao.put(t.get(i), pressure.get(i));
+                                gauge_pressure.speedTo(Float.parseFloat(pressure.get(i)));
+                            }
+                        }
                         else if(show_data_type == CHOOSE_INDOOR){
                             for(int i=0;i<pressure.size();i++){
                                 Pressure_Data.put(t.get(i), pressure.get(i));
@@ -523,8 +562,8 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
             myQuery.Query(ref, time_name, "<=", Get_Now(), 1, "DESCENDING");
             ref = db.collection(UsingIndoor+pressure_name);
             myQuery.Query(ref, time_name, "<=", Get_Now(), 1, "DESCENDING");
-            ref = db.collection(UsingIndoor+location_name);
-            myQuery.Query(ref, time_name, "<=", Get_Now(), 1, "DESCENDING");
+//            ref = db.collection(UsingIndoor+location_name);
+//            myQuery.Query(ref, time_name, "<=", Get_Now(), 1, "DESCENDING");
             txv_show_time.setText("最後更新時間 : " + Get_Now());
         }
         else if(show_data_type == CHOOSE_OUTDOOR){
@@ -533,6 +572,18 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
             myQuery.Query(ref, time_name, "<=", Get_Now(), 1, "DESCENDING");
             ref = db.collection(UsingOutdoor+humidity_name);
             myQuery.Query(ref, time_name, "<=", Get_Now(), 1, "DESCENDING");
+//            ref = db.collection(UsingOutdoor+CO_name);
+//            myQuery.Query(ref, time_name, "<=", Get_Now(), 1, "DESCENDING");
+//            ref = db.collection(UsingOutdoor+CO2_name);
+//            myQuery.Query(ref, time_name, "<=", Get_Now(), 1, "DESCENDING");
+//            ref = db.collection(UsingOutdoor+LPG_name);
+//            myQuery.Query(ref, time_name, "<=", Get_Now(), 1, "DESCENDING");
+            ref = db.collection(UsingOutdoor+dust_name);
+            myQuery.Query(ref, time_name, "<=", Get_Now(), 1, "DESCENDING");
+            ref = db.collection(UsingOutdoor+pressure_name);
+            myQuery.Query(ref, time_name, "<=", Get_Now(), 1, "DESCENDING");
+//            ref = db.collection(UsingOutdoor+location_name);
+//            myQuery.Query(ref, time_name, "<=", Get_Now(), 1, "DESCENDING");
             txv_show_time.setText("最後更新時間 : " + Get_Now());
         }
         else{
@@ -639,8 +690,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                         if(DEBUG) Log.e("Button", "BT_Indoor");
                         show_data_type = CHOOSE_INDOOR;
                         Indoor_Mode();
-                        findViewById(R.id.BT_INDOOR_LABEL).setBackgroundColor(getResources().getColor(R.color.colorW,null));
-                        findViewById(R.id.BT_OUTDOOR_LABEL).setBackgroundColor(getResources().getColor(R.color.colorG,null));
                         data_update();
                     }
                     catch (Exception e){
@@ -662,8 +711,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                         if(DEBUG) Log.e("Button", "BT_Outdoor");
                         show_data_type = CHOOSE_OUTDOOR;
                         Outdoor_Mode();
-                        findViewById(R.id.BT_INDOOR_LABEL).setBackgroundColor(getResources().getColor(R.color.colorG,null));
-                        findViewById(R.id.BT_OUTDOOR_LABEL).setBackgroundColor(getResources().getColor(R.color.colorW,null));
                         data_update();
                     }
                     catch (Exception e){
