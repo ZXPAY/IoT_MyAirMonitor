@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -119,14 +120,14 @@
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
-            <com.github.anastr.speedviewlib.ImageLinearGauge
+            <com.github.anastr.speedviewlib.TubeSpeedometer
                 android:id="@+id/GAUGE_TEMP"
-                android:layout_width="163dp"
-                android:layout_height="75dp"
+                android:layout_width="150dp"
+                android:layout_height="140dp"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:sv_image="@drawable/fire"
+
                 app:sv_withTremble="false"
                 tools:layout_editor_absoluteY="76dp" />
 
@@ -139,12 +140,12 @@
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
-            <com.github.anastr.speedviewlib.ImageLinearGauge
+            <com.github.anastr.speedviewlib.TubeSpeedometer
                 android:id="@+id/GAUGE_HUMIDITY"
                 android:layout_width="150dp"
                 android:layout_height="140dp"
                 android:visibility="visible"
-                app:sv_image="@drawable/water"
+
                 app:sv_textSize="20dp"
                 app:sv_withTremble="false"
                 tools:layout_editor_absoluteX="285dp"

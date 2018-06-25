@@ -21,6 +21,7 @@ import com.github.anastr.speedviewlib.LinearGauge;
 import com.github.anastr.speedviewlib.ProgressiveGauge;
 import com.github.anastr.speedviewlib.RaySpeedometer;
 import com.github.anastr.speedviewlib.SpeedView;
+import com.github.anastr.speedviewlib.TubeSpeedometer;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -71,8 +72,8 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     private final int CHOOSE_INDOOR = 1;
     private final int CHOOSE_OUTDOOR = 0;
 
-    private String UsingOutdoor = "/InDoor/0000000012000008/";
-    private String UsingIndoor = "/OutDoor/0000000012000007/";
+    private String UsingOutdoor = "/OutDoor/0000000012000007/";
+    private String UsingIndoor = "/InDoor/0000000012000008/";
 
     private String time_name = "time";
     private String rssi_name = "rssi";
@@ -103,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
 
     //TextView show_indoor, show_outdoor;
     Button btn_new_window;
-    ImageLinearGauge gauge_humidity, gauge_temperature;
+    TubeSpeedometer gauge_humidity, gauge_temperature;
     ProgressiveGauge gauge_co2;
     AwesomeSpeedometer gauge_co;
     SpeedView gauge_lpg;
@@ -150,17 +151,23 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         myQuery.VERBOSE = false;
         show_data_type = CHOOSE_INDOOR;
         data_update();
-        gauge_humidity = (ImageLinearGauge) findViewById(R.id.GAUGE_HUMIDITY);
-        gauge_humidity.setOrientation(LinearGauge.Orientation.VERTICAL);
+        gauge_humidity = (TubeSpeedometer ) findViewById(R.id.GAUGE_HUMIDITY);
+        //gauge_humidity.setOrientation(LinearGauge.Orientation.VERTICAL);
+        gauge_humidity.setSpeedTextPosition(Gauge.Position.TOP_CENTER);
         gauge_humidity.setUnitTextSize(50);
+        gauge_humidity.setSpeedTextSize(50);
         gauge_humidity.setUnit("%");
+        gauge_humidity.setMaxSpeed(100);
+        gauge_humidity.setMinSpeed(0);
 
-        gauge_temperature = (ImageLinearGauge) findViewById(R.id.GAUGE_TEMP);
-        gauge_temperature.setOrientation(LinearGauge.Orientation.HORIZONTAL);
+        gauge_temperature = (TubeSpeedometer ) findViewById(R.id.GAUGE_TEMP);
+        //gauge_temperature.setOrientation(LinearGauge.Orientation.HORIZONTAL);
+        gauge_temperature.setSpeedTextPosition(Gauge.Position.TOP_CENTER);
         gauge_temperature.setUnit("\u00b0"+"C");
         gauge_temperature.setMaxSpeed(50);
         gauge_temperature.setMinSpeed(0);
         gauge_temperature.setUnitTextSize(50);
+        gauge_temperature.setSpeedTextSize(50);
 
         gauge_co2 = (ProgressiveGauge) findViewById(R.id.GAUGE_CO2);
         gauge_co2.setMaxSpeed(2000);
@@ -344,47 +351,53 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                         for(String d:data_split){
                             String each_data[] = d.split("=");
                             for(int i=0;i<each_data.length;i++){
-                                //Log.e("data", each_data[i]);
-                                if(each_data[i].replaceAll("\\s", "").equals("TS")){
-                                    if(VERBOSE) Log.e("Temperature:", each_data[i+1]);
-                                    temp.add(each_data[i+1]);
+                                try {
+                                    //Log.e("data", each_data[i]);
+                                    if(each_data[i].replaceAll("\\s", "").equals("TS")){
+                                        if(VERBOSE) Log.e("Temperature:", each_data[i+1]);
+                                        temp.add(each_data[i+1]);
+                                    }
+                                    else if(each_data[i].replaceAll("\\s", "").equals("HS")){
+                                        if(VERBOSE) Log.e("Humidity:", each_data[i+1]);
+                                        humi.add(each_data[i+1]);
+                                    }
+                                    else if(each_data[i].replaceAll("\\s", "").equals("CS")){
+                                        if(VERBOSE) Log.e("CO:", each_data[i+1]);
+                                        co.add(each_data[i+1]);
+                                    }
+                                    else if(each_data[i].replaceAll("\\s", "").equals("IS")){
+                                        if(VERBOSE) Log.e("CO2:", each_data[i+1]);
+                                        co2.add(each_data[i+1]);
+                                    }
+                                    else if(each_data[i].replaceAll("\\s", "").equals("AS")){
+                                        if(VERBOSE) Log.e("AS:", each_data[i+1]);
+                                        pressure.add(each_data[i+1]);
+                                    }
+                                    else if(each_data[i].replaceAll("\\s", "").equals("MS")){
+                                        if(VERBOSE) Log.e("Dust:", each_data[i+1]);
+                                        dust.add(each_data[i+1]);
+                                    }
+                                    else if(each_data[i].replaceAll("\\s", "").equals("LS")){
+                                        if(VERBOSE) Log.e("LPG:", each_data[i+1]);
+                                        lpg.add(each_data[i+1]);
+                                    }
+                                    else if(each_data[i].replaceAll("\\s", "").equals("time")){
+                                        if(VERBOSE) Log.e("time", each_data[i+1]);
+                                        t.add(each_data[i+1]);
+                                    }
+                                    else if(each_data[i].replaceAll("\\s", "").equals("DNLIST")){
+                                        if(VERBOSE) Log.e("DNS", each_data[i+1]);
+                                        loc.add(each_data[i+1]);
+                                    }
+                                    else if(each_data[i].replaceAll("\\s", "").equals("rssi")){
+                                        if(VERBOSE) Log.e("rssi", each_data[i+1]);
+                                        rssi.add(each_data[i+1]);
+                                    }
                                 }
-                                else if(each_data[i].replaceAll("\\s", "").equals("HS")){
-                                    if(VERBOSE) Log.e("Humidity:", each_data[i+1]);
-                                    humi.add(each_data[i+1]);
+                                catch (Exception e){
+                                    e.printStackTrace();
                                 }
-                                else if(each_data[i].replaceAll("\\s", "").equals("CS")){
-                                    if(VERBOSE) Log.e("CO:", each_data[i+1]);
-                                    co.add(each_data[i+1]);
-                                }
-                                else if(each_data[i].replaceAll("\\s", "").equals("IS")){
-                                    if(VERBOSE) Log.e("CO2:", each_data[i+1]);
-                                    co2.add(each_data[i+1]);
-                                }
-                                else if(each_data[i].replaceAll("\\s", "").equals("AS")){
-                                    if(VERBOSE) Log.e("AS:", each_data[i+1]);
-                                    pressure.add(each_data[i+1]);
-                                }
-                                else if(each_data[i].replaceAll("\\s", "").equals("MS")){
-                                    if(VERBOSE) Log.e("Dust:", each_data[i+1]);
-                                    dust.add(each_data[i+1]);
-                                }
-                                else if(each_data[i].replaceAll("\\s", "").equals("LS")){
-                                    if(VERBOSE) Log.e("LPG:", each_data[i+1]);
-                                    lpg.add(each_data[i+1]);
-                                }
-                                else if(each_data[i].replaceAll("\\s", "").equals("time")){
-                                    if(VERBOSE) Log.e("time", each_data[i+1]);
-                                    t.add(each_data[i+1]);
-                                }
-                                else if(each_data[i].replaceAll("\\s", "").equals("DNLIST")){
-                                    if(VERBOSE) Log.e("DNS", each_data[i+1]);
-                                    loc.add(each_data[i+1]);
-                                }
-                                else if(each_data[i].replaceAll("\\s", "").equals("rssi")){
-                                    if(VERBOSE) Log.e("rssi", each_data[i+1]);
-                                    rssi.add(each_data[i+1]);
-                                }
+
                             }
                         }
                     }

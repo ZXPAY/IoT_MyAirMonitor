@@ -49,7 +49,7 @@ public class MainAdvanceOutdoorQuery extends AppCompatActivity implements Button
     Map<String, String> Loc_Data = new LinkedHashMap<String, String>();
     Map<String, String> Dust_Data = new LinkedHashMap<String, String>();
 
-    private String UsingOutdoor = "/InDoor/0000000012000008/";
+    private String UsingOutdoor = "/OutDoor/0000000012000007/";
 
     private String time_name = "time";
     private String rssi_name = "rssi";
