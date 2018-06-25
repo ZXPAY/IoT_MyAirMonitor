@@ -48,7 +48,7 @@ public class MainAdvanceIndoorQuery extends AppCompatActivity implements Button.
     Map<String, String> Loc_Data = new LinkedHashMap<String, String>();
     Map<String, String> Dust_Data = new LinkedHashMap<String, String>();
 
-    private String UsingIndoor = "/InDoor/0000000012000008/";
+    private String UsingIndoor = "/OutDoor/0000000012000007/";
 
     private String time_name = "time";
     private String rssi_name = "rssi";

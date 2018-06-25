@@ -72,8 +72,8 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     private final int CHOOSE_INDOOR = 1;
     private final int CHOOSE_OUTDOOR = 0;
 
-    private String UsingOutdoor = "/OutDoor/0000000012000007/";
-    private String UsingIndoor = "/InDoor/0000000012000008/";
+    private String UsingOutdoor = "/InDoor/0000000012000008/";
+    private String UsingIndoor = "/OutDoor/0000000012000007/";
 
     private String time_name = "time";
     private String rssi_name = "rssi";
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     // keys for indoor and outdoor (the array define in strings.xml)
     String[] indoor_array;
     String[] outdoor_array;
-    ArrayList<Integer> details_array;
+    float[] details_array = {0f,0f,0f,0f,0f,0f,0f,0f,0f};
 
     // Access a Cloud Firestore instance from your Activity
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -407,6 +407,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                                 Temp_Datai.put(t.get(i), temp.get(i));
                                 //Log.e("Tempi", Temp_Datai.toString());
                                 gauge_temperature.speedTo(Float.parseFloat(temp.get(i)));
+                                details_array[0] = Float.parseFloat(temp.get(i));
                             }
                         }
                         else if(show_data_type == CHOOSE_OUTDOOR){
@@ -414,6 +415,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                                 Temp_Datao.put(t.get(i), temp.get(i));
                                 //Log.e("Tempo", Temp_Datao.toString());
                                 gauge_temperature.speedTo(Float.parseFloat(temp.get(i)));
+                                details_array[7] = Float.parseFloat(temp.get(i));
                             }
                         }
                     }
@@ -423,12 +425,14 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                                 Humi_Datai.put(t.get(i), humi.get(i));
 //                                Log.e("ef", humi.get(i));
                                 gauge_humidity.speedTo(Float.parseFloat(humi.get(i)));
+                                details_array[1] = Float.parseFloat(humi.get(i));
                             }
                         }
                         else if(show_data_type == CHOOSE_OUTDOOR){
                             for(int i=0;i<humi.size();i++){
                                 Humi_Datao.put(t.get(i), humi.get(i));
                                 gauge_humidity.speedTo(Float.parseFloat(humi.get(i)));
+                                details_array[8] = Float.parseFloat(humi.get(i));
                             }
 
                         }
@@ -439,6 +443,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                             for(int i=0;i<co.size();i++){
                                 CO_Data.put(t.get(i), co.get(i));
                                 gauge_co.speedTo(Float.parseFloat(co.get(i)));
+                                details_array[2] = Float.parseFloat(co.get(i));
                             }
                         }
                     }
@@ -448,6 +453,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                             for(int i=0;i<co2.size();i++){
                                 CO2_Data.put(t.get(i), co2.get(i));
                                 gauge_co2.speedTo(Float.parseFloat(co2.get(i)));
+                                details_array[3] = Float.parseFloat(co2.get(i));
                             }
                         }
                     }
@@ -457,6 +463,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                             for(int i=0;i<lpg.size();i++){
                                 LPG_Data.put(t.get(i), lpg.get(i));
                                 gauge_lpg.speedTo(Float.parseFloat(lpg.get(i)));
+                                details_array[4] = Float.parseFloat(lpg.get(i));
                             }
                         }
                     }
@@ -466,6 +473,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                             for(int i=0;i<dust.size();i++){
                                 Dust_Data.put(t.get(i), dust.get(i));
                                 gauge_pm.speedTo(Float.parseFloat(dust.get(i)));
+                                details_array[5] = Float.parseFloat(dust.get(i));
                             }
                         }
                     }
@@ -475,6 +483,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                             for(int i=0;i<pressure.size();i++){
                                 Pressure_Data.put(t.get(i), pressure.get(i));
                                 gauge_pressure.speedTo(Float.parseFloat(pressure.get(i)));
+                                details_array[6] = Float.parseFloat(pressure.get(i));
                             }
                         }
                     }
@@ -675,7 +684,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
                 Intent intent_details = new Intent();
                 intent_details.setClass(MainActivity.this, MainActivityDetails.class);
                 Bundle bundle_details = new Bundle();
-                bundle_details.putIntegerArrayList("details",details_array);
+                bundle_details.putFloatArray("details",details_array);
                 intent_details.putExtras(bundle_details);
                 startActivity(intent_details);
                 break;
