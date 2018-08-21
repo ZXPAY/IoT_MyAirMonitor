@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/MENU_SETTING"
+        android:title="設定"
+        app:showAsAction="never">
+    </item>
+    <item
+        android:id="@+id/MENU_TEAM_INTRO"
+        android:title="團隊簡介"
+        app:showAsAction="never">
+    </item>
+
+    <item
+        android:id="@+id/my_search"
+        android:title="搜尋"
+        android:orderInCategory="1"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="always" />
+
+</menu>

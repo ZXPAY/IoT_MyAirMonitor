@@ -27,6 +27,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     compile 'com.github.anastr:speedviewlib:1.2.0'
+    compile 'pl.pawelkleczkowski.customgauge:CustomGauge:1.0.3'
     implementation 'com.jjoe64:graphview:4.2.2'
 }
 

@@ -4,13 +4,13 @@
 
     <application
         android:allowBackup="true"
-        android:largeHeap="true"
         android:hardwareAccelerated="true"
-        android:icon="@mipmap/air"
+        android:icon="@drawable/icon_08x"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +20,11 @@
         <activity android:name=".MainActivityDetails" />
         <activity android:name=".MainAdvanceIndoorQuery" />
         <activity android:name=".MainAdvanceOutdoorQuery" />
-        <activity android:name=".MainActivityPlotData"></activity>
+        <activity android:name=".MainActivityPlotData" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".WelcomeQueyActivity" />
+        <activity android:name=".IndoorActivity" />
+        <activity android:name=".OutdoorActivity"></activity>
     </application>
 
 </manifest>

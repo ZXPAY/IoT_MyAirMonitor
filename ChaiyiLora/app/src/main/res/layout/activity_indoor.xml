@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_dark"
+    tools:context=".IndoorActivity"
+    tools:layout_editor_absoluteY="81dp">
+
+    <LinearLayout
+        android:id="@+id/linearLayout_UP"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:background="@color/colorGreen"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="93dp"
+            android:layout_marginEnd="80dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="0dp">
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="80dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/indoor"
+                tools:layout_editor_absoluteX="74dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <TextView
+                android:id="@+id/TXV_TITLE"
+                android:layout_width="143dp"
+                android:layout_height="57dp"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="良好"
+                android:textSize="40dp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="138dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/IMG_BACK"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@android:drawable/ic_menu_revert"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="86dp" />
+
+            <ImageView
+                android:id="@+id/IMG_SET"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@android:drawable/ic_menu_manage"
+                tools:layout_editor_absoluteX="163dp"
+                tools:layout_editor_absoluteY="86dp" />
+
+            <ImageView
+                android:id="@+id/IMG_LOVE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@android:drawable/btn_star"
+                tools:layout_editor_absoluteX="352dp"
+                tools:layout_editor_absoluteY="86dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView4"
+        android:layout_width="match_parent"
+        android:layout_height="428dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout_UP">
+
+        <LinearLayout
+            android:id="@+id/linearLayout7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TXV_TITLE">
+
+            <LinearLayout
+                android:id="@+id/LinearLayoutTemp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/background_dark"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/IMG_Temp"
+                    android:layout_width="65dp"
+                    android:layout_height="75dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/tem"
+                    app:layout_constraintBottom_toTopOf="@+id/GAUGE_Temp"
+                    app:layout_constraintEnd_toStartOf="@+id/GAUGE_Temp"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/GAUGE_Temp"
+                    app:layout_constraintTop_toBottomOf="@+id/GAUGE_Temp" />
+
+                <com.github.anastr.speedviewlib.TubeSpeedometer
+                    android:id="@+id/GAUGE_Temp"
+                    android:layout_width="190dp"
+                    android:layout_height="101dp"
+                    app:sv_highSpeedColor="@android:color/holo_red_dark"
+                    app:sv_lowSpeedColor="@color/colorGreen"
+                    app:sv_maxSpeed="50"
+                    app:sv_mediumSpeedColor="@color/colorGreen"
+                    app:sv_minSpeed="0"
+                    app:sv_speedTextColor="@color/colorW"
+                    app:sv_speedometerColor="@color/colorGreen"
+                    app:sv_textColor="@color/colorW"
+                    app:sv_unitTextColor="@color/colorW"
+                    app:sv_withTremble="false" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="57dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/GAUGE_Temp"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:text="溫度"
+                    android:layout_weight="1"
+                    android:textColor="@color/colorW"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayoutHumidity"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/background_dark"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/IMG_Humidity"
+                    android:layout_width="65dp"
+                    android:layout_height="75dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/hu"
+                    app:layout_constraintBottom_toTopOf="@+id/GAUGE_Humidity"
+                    app:layout_constraintEnd_toStartOf="@+id/GAUGE_Humidity"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/GAUGE_Humidity"
+                    app:layout_constraintTop_toBottomOf="@+id/GAUGE_Humidity" />
+
+                <com.github.anastr.speedviewlib.TubeSpeedometer
+                    android:id="@+id/GAUGE_Humidity"
+                    android:layout_width="190dp"
+                    android:layout_height="101dp"
+                    app:sv_highSpeedColor="@android:color/holo_red_dark"
+                    app:sv_lowSpeedColor="@color/colorGreen"
+                    app:sv_maxSpeed="100"
+                    app:sv_mediumSpeedColor="@color/colorGreen"
+                    app:sv_minSpeed="0"
+                    app:sv_speedTextColor="@color/colorW"
+                    app:sv_speedometerColor="@color/colorGreen"
+                    app:sv_textColor="@color/colorW"
+                    app:sv_unitTextColor="@color/colorW"
+                    app:sv_withTremble="false" />
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="57dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="25dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorW"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="濕度" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayoutCO"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/background_dark"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/IMG_CO"
+                    android:layout_width="65dp"
+                    android:layout_height="75dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/icon_co"
+                    app:layout_constraintBottom_toTopOf="@+id/GAUGE_PRESSURE"
+                    app:layout_constraintEnd_toStartOf="@+id/GAUGE_PRESSURE"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/GAUGE_PRESSURE"
+                    app:layout_constraintTop_toBottomOf="@+id/GAUGE_PRESSURE" />
+
+                <com.github.anastr.speedviewlib.TubeSpeedometer
+                    android:id="@+id/GAUGE_CO"
+                    android:layout_width="190dp"
+                    android:layout_height="101dp"
+                    app:sv_highSpeedColor="@android:color/holo_red_dark"
+                    app:sv_lowSpeedColor="@color/colorGreen"
+                    app:sv_maxSpeed="2000"
+                    app:sv_mediumSpeedColor="@color/colorGreen"
+                    app:sv_minSpeed="0"
+                    app:sv_speedTextColor="@color/colorW"
+                    app:sv_speedometerColor="@color/colorGreen"
+                    app:sv_textColor="@color/colorW"
+                    app:sv_unitTextColor="@color/colorW"
+                    app:sv_withTremble="false" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="57dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="25dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorW"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="一氧\n化碳" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayoutCO2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/background_dark"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/IMG_CO2"
+                    android:layout_width="65dp"
+                    android:layout_height="75dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/icon_co2"
+                    app:layout_constraintBottom_toTopOf="@+id/GAUGE_PM"
+                    app:layout_constraintEnd_toStartOf="@+id/GAUGE_CO2"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/GAUGE_CO2"
+                    app:layout_constraintTop_toBottomOf="@+id/GAUGE_CO2" />
+
+                <com.github.anastr.speedviewlib.TubeSpeedometer
+                    android:id="@+id/GAUGE_CO2"
+                    android:layout_width="190dp"
+                    android:layout_height="101dp"
+                    app:sv_highSpeedColor="@android:color/holo_red_dark"
+                    app:sv_lowSpeedColor="@color/colorGreen"
+                    app:sv_maxSpeed="2000"
+                    app:sv_mediumSpeedColor="@color/colorGreen"
+                    app:sv_minSpeed="0"
+                    app:sv_speedTextColor="@color/colorW"
+                    app:sv_speedometerColor="@color/colorGreen"
+                    app:sv_textColor="@color/colorW"
+                    app:sv_unitTextColor="@color/colorW"
+                    app:sv_withTremble="false" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="57dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="25dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorW"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="二氧\n化碳" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayoutPM"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/background_dark"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/IMG_PM"
+                    android:layout_width="65dp"
+                    android:layout_height="70dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/pm"
+                    app:layout_constraintBottom_toTopOf="@+id/GAUGE_PM"
+                    app:layout_constraintEnd_toStartOf="@+id/GAUGE_PM"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/GAUGE_PM"
+                    app:layout_constraintTop_toBottomOf="@+id/GAUGE_CO2" />
+
+                <com.github.anastr.speedviewlib.TubeSpeedometer
+                    android:id="@+id/GAUGE_PM"
+                    android:layout_width="190dp"
+                    android:layout_height="101dp"
+                    app:sv_highSpeedColor="@android:color/holo_red_dark"
+                    app:sv_lowSpeedColor="@color/colorGreen"
+                    app:sv_maxSpeed="500"
+                    app:sv_mediumSpeedColor="@color/colorGreen"
+                    app:sv_minSpeed="0"
+                    app:sv_speedTextColor="@color/colorW"
+                    app:sv_speedometerColor="@color/colorGreen"
+                    app:sv_textColor="@color/colorW"
+                    app:sv_unitTextColor="@color/colorW"
+                    app:sv_withTremble="false" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="57dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="25dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorW"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="空氣\n微粒" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayoutLPG"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/background_dark"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/IMG_LPG"
+                    android:layout_width="65dp"
+                    android:layout_height="75dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/lpg"
+                    app:layout_constraintBottom_toTopOf="@+id/GAUGE_LPG"
+                    app:layout_constraintEnd_toStartOf="@+id/GAUGE_LPG"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/GAUGE_LPG"
+                    app:layout_constraintTop_toBottomOf="@+id/GAUGE_LPG" />
+
+                <com.github.anastr.speedviewlib.TubeSpeedometer
+                    android:id="@+id/GAUGE_LPG"
+                    android:layout_width="190dp"
+                    android:layout_height="101dp"
+                    app:sv_highSpeedColor="@android:color/holo_red_dark"
+                    app:sv_lowSpeedColor="@color/colorGreen"
+                    app:sv_maxSpeed="2000"
+                    app:sv_mediumSpeedColor="@color/colorGreen"
+                    app:sv_minSpeed="0"
+                    app:sv_speedTextColor="@color/colorW"
+                    app:sv_speedometerColor="@color/colorGreen"
+                    app:sv_textColor="@color/colorW"
+                    app:sv_unitTextColor="@color/colorW"
+                    app:sv_withTremble="false" />
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="57dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="25dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorW"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="瓦斯" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/TXV_UPDATE"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="資料儲存時間"
+        android:gravity="center"
+        android:textColor="@color/colorW"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView4" />
+
+
+</android.support.constraint.ConstraintLayout>

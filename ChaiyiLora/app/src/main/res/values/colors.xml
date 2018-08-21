@@ -4,6 +4,12 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorW">#FFFFFF</color>
+    <color name="colorR">#FF0000</color>
     <color name="colorG">#DDDDDD</color>
     <color name="colorDG">#888888</color>
+    <color name="colorGreen">#228B22</color>
+    <color name="colorGood">#77DD97</color>
+    <color name="colorSoSo">#F5F07A</color>
+    <color name="colorBad">#FF8D6E</color>
+    <color name="colorDanger">#D27473</color>
 </resources>

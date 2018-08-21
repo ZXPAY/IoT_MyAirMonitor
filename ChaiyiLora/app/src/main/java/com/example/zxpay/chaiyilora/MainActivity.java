@@ -24,7 +24,6 @@ import com.github.anastr.speedviewlib.LinearGauge;
 import com.github.anastr.speedviewlib.ProgressiveGauge;
 import com.github.anastr.speedviewlib.RaySpeedometer;
 import com.github.anastr.speedviewlib.SpeedView;
-import com.github.anastr.speedviewlib.TubeSpeedometer;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -39,7 +38,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 /*
    12000008:
@@ -182,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         gauge_co2.setUnit("ppm");
         gauge_co2.setUnitTextSize(50);
 
-        gauge_co = (AwesomeSpeedometer) findViewById(R.id.GAUGE_CO);
+        gauge_co = (AwesomeSpeedometer) findViewById(R.id.GAUGE_PRESSURE);
         gauge_co.setMaxSpeed(2000);
         gauge_co.setMinSpeed(0);
         gauge_co.setUnit("ppm");
